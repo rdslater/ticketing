@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>Team Ticketing</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Team Tickets</h1>
+        
+        <article>
+            <form action="/create" method="post" style="display: flex; gap: 10px; align-items: flex-end;">
+                <label> Task
+                    <input type="text" name="title" placeholder="What needs doing?" required>
+                </label>
+                <label> Priority
+                    <select name="priority">
+                        <option>Low</option>
+                        <option selected>Medium</option>
+                        <option>High</option>
+                    </select>
+                </label>
+                <button type="submit">Add</button>
+            </form>
+        </article>
+
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Task</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.id }}</td>
+                    <td>{{ ticket.title }}</td>
+                    <td><mark>{{ ticket.priority }}</mark></td>
+                    <td><a href="/close/{{ ticket.id }}" class="outline">Close</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
